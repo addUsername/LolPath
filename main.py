@@ -6,19 +6,17 @@ Created on Thu Jun  4 19:57:43 2020
 """
 
 from scripts.Analytics import Analytics as ana
-#from scripts.Plotting import Plotting as hola
+from scripts.Plotting import Plotting as hola
 import os
 
 def main():
 
     champions = ["AmumuO","CaitlynO","FizzO","DariusO","MorganaO"]
-    print(champions)
-    print((os.getcwd()[:len(os.getcwd())-13]+"visualization\\resources\\videoHD.mp4" , champions))
     
     #(self, threshold, second_inicial, frame_step, frame_stop)
     video = ana(os.getcwd()[:len(os.getcwd())-13]+"visualization\\resources\\videoHD.mp4" , champions)
-    video.readVideo(0.30,60,1,20)
-    video.writeVideo()
+    video.readVideo(0.33,500,2,3000)
+    video.writeVideo("threshold0.33_noCNN34")
     
     '''
     plot = Plotting(video.title,champions)
