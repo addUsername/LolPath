@@ -91,11 +91,12 @@ class Analytics:
                     elif (fram_pos>frame_stop):
                         self.champions_dict["0frameStep"]=frame_step
                         self.champions_dict["0seg,f_step,f_stop"]=[second_inicial, frame_step, frame_stop]
+                        
                         print(self.champions_dict["0seg,f_step,f_stop"])
                         self.writeJSON()
                         return 1                    
                         
-                    fram_pos+=1
+                fram_pos+=1
             else:
                 break
         print("Lenght of first champion: "+str(len(self.champions_dict[self.champions_name[0]])))
@@ -150,6 +151,7 @@ class Analytics:
                        else:
                            cv2.circle(frame,tuple((ult_valid_position[i])), 13, colors[i], 1)
                        i+=1
+                       
                 else:
                     i=0
                     for champ in (self.champions):
