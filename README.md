@@ -3,8 +3,12 @@ _Simple matchTemplate with OpenCV, a minimun of Matplotlib written in Python_ do
 
 Simple OCR to get count champion_deaths
 
--getData from video, crop image
--transform data, resize, canny edges.. easy
--feed model
--???
+- _getData from video, crop image_ done
+- _transform data, resize, canny edges.._ done
+- create model, feed it, evaluate
+- ???
+- implement
+- extend to time, personal escore board, etc..
+
+NN to champions detection on minimap
 
