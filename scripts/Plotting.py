@@ -15,17 +15,16 @@ import os
 import numpy as np
 from matplotlib._png import read_png
 
+
 class Plotting:
-        
-    
-    def __init__(self,title,champions):
-        
+
+    def __init__(self, title, champions):
+
         self.title = title
         self.champions = champions
-        self.champions_dict={}
+        self.champions_dict = {}
         self.readJson()
-        
-        
+
     def writeJson(self):
         #ojo con esto que sobrescribe
         with open(os.getcwd()[:len(os.getcwd())-13]+"visualization\\outputs\\"+self.title+".json","w") as file: 

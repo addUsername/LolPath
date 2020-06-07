@@ -2,16 +2,16 @@ import cv2
 import json
 import os.path
 
+
 class Analytics:
-    
+
     champions = []
     champions_name = []
-    champions_dict={}
-    
-    scale_percent = 52 # percent of original size
-    
+    champions_dict = {}
+
+    scale_percent = 52  # percent of original size
     title = ""
-    
+
     def __init__(self,video_path,champions):
         
         self.video_path=video_path
