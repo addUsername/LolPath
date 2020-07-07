@@ -1,6 +1,6 @@
 # LolPath
-_Simple matchTemplate with OpenCV, a minimun of Matplotlib written in Python_ done
-_Write outputs to json, plots and video_ done
+-_Simple matchTemplate with OpenCV, a minimun of Matplotlib written in Python_ done
+-_Write outputs to json, plots and video_ done
 
 
 Simple OCR to get count champion_deaths
