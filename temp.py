@@ -1,5 +1,13 @@
 import json
 import cv2
+'''
+    I think this badboy could work as a semi-manual-labeler, this crop 2 areas
+    from death scoreboard and allow you to label it in a 'black magic switch
+    logic' way that is not ok.
+
+    @Author: SERGI
+
+'''
 
 
 diccionario = {}
@@ -22,13 +30,18 @@ while(video_rgb.isOpened()):
 
     # Capture frame-by-frame
     ret, frame = video_rgb.read()
-    fp += 200
+    fp += 300
     # ret == false and end video happns
     if (ret):
-        frame = frame[0:h1, w1:w1+45]
+
+    # ========================================================================
+    # U are looking for this shit, good luck in CROP CITY
+    # ========================================================================
+
+        frame = frame[0:h1, w1:w1+43]
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame_red = frame[5:len(frame)-5, :12]
-        frame_blue = frame[5:len(frame)-5, len(frame[0])-16:]
+        frame_red = frame[7:len(frame)-7, :12]
+        frame_blue = frame[7:len(frame)-7, len(frame[0])-12: len(frame[0])]
 
         add_red = True
         add_blue = True
@@ -59,17 +72,17 @@ diccionario["featuresRed"] = imagesRed
 
 # index=np.arange(len(imagesBlue))
 # for idx,image in enumerate(imagesBlue):
-    
+
 #     cv2.imwrite("./dataaa/blue/"+str(index[idx])+".jpg", image)
-    
+
 # index=np.arange(len(imagesRed))
 # for idx,image in enumerate(imagesRed):
-    
-#     cv2.imwrite("./dataaa/red/"+str(index[idx])+".jpg", image)
+
+# cv2.imwrite("./dataaa/red/"+str(index[idx])+".jpg", image)
 index = 0
 labels = []
 for img in frames_red:
-    label = [0 for _ in range(10)]
+
     cv2.imshow('img', img)
     k = cv2.waitKey()
     if k == 27:    # Esc key to stop
@@ -77,8 +90,7 @@ for img in frames_red:
     # p
     elif k == 112:
 
-        label = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-        labels.append(label)
+        labels.append(None)
         index += 1
     elif k == -1:  # normally -1 returned,so don't print it
         continue
@@ -89,17 +101,16 @@ for img in frames_red:
         if q == 27:    # Esc key to stop
             break
         else:
-            label[q-48] = 1
-            labels[-1] = label
+
+            labels[-1] = q - 48
             print("rojos!! modficiado " + str(q-48))
             cv2.imshow('img', img)
             q = cv2.waitKey()
             print("rojos!! actual " + str(q-48))
-            labels.append(q-48)
+            labels.append(q - 48)
     else:
 
-        label[k-48] = 1
-        labels.append(label)
+        labels.append(k-48)
         index += 1
         print("rojos!! " + str(k-48))  # else print its value
     cv2.destroyAllWindows()
@@ -108,38 +119,38 @@ diccionario["LabelsRed"] = labels
 index = 0
 labels = []
 for img in frames_blue:
-    label = [0 for _ in range(10)]
+
     cv2.imshow('img', img)
     k = cv2.waitKey()
     if k == 27:    # Esc key to stop
         break
+
     elif k == -1:  # normally -1 returned,so don't print it
         continue
-    elif k == 112:
 
-        label[1] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-        labels.append(label)
+    elif k == 112:
+        labels.append(None)
         index += 1
+
     elif k == 98:  # ir atras un numero, actualizarlo, escribir este y conti
         cv2.imshow('Anterior', frames_red[index-1])
         q = cv2.waitKey()
         if q == 27:    # Esc key to stop
             break
         else:
-            label[q-48] = 1
-            labels[index] = label
+            labels[-1] = q - 48
             print("azul!! modficiado " + str(q-48))
             cv2.imshow('img', img)
             q = cv2.waitKey()
-            labels.append(q-48)
+            labels.append(q - 48)
             print("azul!! actual " + str(q-48))
     else:
-        label[k-48] = 1
-        labels.append(label)
+
+        labels.append(k-48)
         index += 1
         print("valuee!! " + str(k))  # else print its value
 
     cv2.destroyAllWindows()
 diccionario["LabelsBlue"] = labels
-with open("./dataaa/data.json", "w") as file:
+with open("./dataaa/final_data_18x12_20samples.json", "w") as file:
     json.dump(diccionario, file)
